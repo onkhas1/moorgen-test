@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>MOORGEN × IDEAL DESIGN SPACE</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: тёмный «кадр» в духе ленты бренда — низкий тёплый свет, янтарь на почти чёрном, подписи капсом с разрядкой. Одна тёмная тема — осознанно, под визуальный язык moorgen */
+:root{
+  color-scheme:dark;
+  --bg:#0e0b08; --paper:#16120e; --paper-2:#1d1813; --ink:#efe7da; --muted:#b0a490; --line:#2e271f;
+  --amber:#d9a55c; --amber-soft:rgba(217,165,92,.12);
+  --ok:#9fd1ac; --ok-bg:#1c2e22; --chk:#e8c27a; --chk-bg:#3a2d16; --ask:#f0a493; --ask-bg:#3d211b;
+  --f-display:"Jost","Helvetica Neue",Arial,sans-serif; --f-body:"Golos Text",system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.7 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 96px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:96px}
+.prose{max-width:66ch}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display);font-weight:300}
+h1{font-size:clamp(38px,6vw,70px);line-height:1.04;letter-spacing:.01em}
+h2{font-size:clamp(28px,3.4vw,40px);line-height:1.12}
+h3{font-size:24px;line-height:1.25;font-weight:400}
+p{margin:0}
+a{color:var(--ink);text-decoration-color:var(--amber);text-underline-offset:3px}
+a:hover{color:var(--amber)}
+a:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.eyebrow{font:500 12px/1.4 var(--f-display);letter-spacing:.24em;text-transform:uppercase;color:var(--amber)}
+.note{font-size:14px;color:var(--muted)}
+section{display:grid;gap:30px}
+.sec-head{display:grid;gap:14px;border-top:1px solid var(--line);padding-top:24px}
+
+/* Hero */
+.hero{display:grid;gap:36px;padding-top:48px}
+.hero-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:500 12px var(--f-display);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.wordmark{font:400 22px var(--f-display);letter-spacing:.02em;text-transform:none;color:var(--ink)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;align-items:end}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr}}
+.lede{font-size:17px;max-width:46ch;color:#d9cfbf}
+.frame{position:relative;aspect-ratio:4/5;max-width:100%;margin:0;overflow:hidden;
+  background:
+   radial-gradient(60% 45% at 50% 8%,rgba(255,196,120,.38),transparent 70%),
+   linear-gradient(90deg,#120e0a 0 18%,#2a2016 18% 19%,#1c1610 19% 81%,#2a2016 81% 82%,#120e0a 82%),
+   #120e0a}
+.frame::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
+.panel{position:absolute;left:50%;top:48%;width:20%;aspect-ratio:1;transform:translate(-50%,-50%);background:linear-gradient(150deg,#3b342c,#1b1712);box-shadow:0 22px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,220,170,.25);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;place-items:center;padding:0;gap:0}
+.panel i{display:block;width:26%;aspect-ratio:1;border-radius:50%;background:#6b5d4b}
+.panel i:first-child{background:#e3b56d}
+.caps{position:absolute;left:18px;right:18px;display:flex;justify-content:space-between;gap:12px;z-index:1;font:500 11.5px var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:#f1e6d4}
+.caps .wm{text-transform:none;letter-spacing:.02em;font-weight:400;font-size:15px}
+.caps.top{top:58%}
+.frame figcaption{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#d8ccb8;font:400 12px/1.5 var(--f-body)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:13.5px;color:var(--muted)}
+.legend span{display:inline-flex;gap:8px;align-items:center}
+.st{display:inline-block;font:500 11px/1 var(--f-mono);letter-spacing:.04em;padding:6px 8px;white-space:nowrap;vertical-align:1px}
+.st.ok{background:var(--ok-bg);color:var(--ok)}
+.st.chk{background:var(--chk-bg);color:var(--chk)}
+.st.ask{background:var(--ask-bg);color:var(--ask)}
+
+/* Tables */
+.scroll{overflow-x:auto;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.6}
+th,td{text-align:left;vertical-align:top;padding:16px;border-bottom:1px solid var(--line)}
+th{font:500 11.5px/1.3 var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+tr:last-child td{border-bottom:0}
+.facts{min-width:760px}
+.plan{min-width:1280px}
+.plan td{min-width:140px}
+.plan td.day{font:300 40px/1 var(--f-display);min-width:64px;color:var(--amber)}
+.plan td.req{background:rgba(240,164,147,.06);min-width:230px}
+.plan td.req::before{content:"Запросить";display:block;font:500 11px var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--ask);margin-bottom:6px}
+
+ul,ol{margin:0;padding-left:20px;display:grid;gap:8px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.grid2>*{min-width:0}
+.card{background:var(--paper);padding:28px;display:grid;gap:14px;align-content:start}
+.label{font:500 11.5px/1.4 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* Visual language */
+.vis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px}
+.vis>div{min-width:0;aspect-ratio:4/5;position:relative;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;color:#f1e6d4;font-size:13px;line-height:1.5}
+.vis b{font:500 11.5px var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.v1{background:radial-gradient(50% 40% at 50% 40%,rgba(255,190,110,.55),transparent 70%),#0d0a07}
+.v2{background:linear-gradient(180deg,#2a2118,#0e0b08)}
+.v3{background:radial-gradient(70% 50% at 70% 20%,rgba(255,200,130,.25),transparent),linear-gradient(90deg,#17120d 50%,#211a13 50%)}
+.v4{background:#0e0b08;border:1px solid var(--line)}
+
+/* Post */
+.post-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:24px;align-items:start}
+@media (max-width:860px){.post-wrap{grid-template-columns:1fr}}
+.post{background:var(--paper);padding:0 0 28px;display:grid;gap:16px;max-width:620px}
+.post .shot{aspect-ratio:16/9;position:relative;overflow:hidden;
+  background:radial-gradient(45% 60% at 72% 10%,rgba(255,196,120,.35),transparent 70%),linear-gradient(90deg,#120e0a 60%,#1e1811 60%);display:flex;align-items:flex-end;padding:14px 18px;color:#d8ccb8;font:400 12px/1.5 var(--f-body)}
+.post .shot .panel{width:11%;left:72%;top:44%}
+.post .shot .caps.top{top:auto;bottom:44px}
+.post>*:not(.shot){margin-inline:28px}
+.post h3{font-size:28px}
+.post .ph{background:var(--ask-bg);color:var(--ask);padding:2px 6px;font-size:.92em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.post sup,.src sup{color:var(--amber);font-weight:600}
+.mono{font:400 12px/1.6 var(--f-mono);word-break:break-all;background:var(--paper-2);color:var(--muted);padding:12px 14px}
+
+/* AI flow */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px}
+.step{padding:18px 16px;display:grid;gap:8px;align-content:start;background:var(--paper)}
+.step .n{font:300 32px/1 var(--f-display);color:var(--muted)}
+.step b{font-weight:600;font-size:14px}
+.step span{font-size:13px;color:var(--muted)}
+.step.check{background:var(--chk-bg)}
+.step.check .n,.step.check b{color:var(--chk)}
+.step.human{background:var(--amber);color:#1a130a}
+.step.human span{color:#3a2b16}
+.step.human .n{color:#1a130a}
+.log{font:400 12.5px/1.7 var(--f-mono);background:var(--paper);padding:20px;display:grid;gap:12px;overflow-x:auto}
+.log .who{color:var(--amber)}
+.mine{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px}
+.mine>div{background:var(--paper);padding:22px;display:grid;gap:8px;align-content:start;border-top:2px solid var(--amber)}
+.mine b{font-weight:600}
+.diff{display:grid;gap:18px;font-size:14.5px}
+.del{text-decoration:line-through;color:var(--ask)}
+.add{color:var(--ok)}
+.who-tag{font:500 11px var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-left:8px}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:22px}
+@media (max-width:520px){.card{padding:20px}.post>*:not(.shot){margin-inline:18px}.hero{padding-top:28px}}
+
+/* unified grid */
+.sec-head{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 48px;align-items:end}
+.sh-l{display:grid;gap:14px}
+.sec-head>.note{max-width:56ch}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr}}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid2>.card,.grid2>div{height:100%}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.audit{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px}
+.audit .label{grid-column:1/-1}
+@media (max-width:760px){.audit{grid-template-columns:1fr}}
+.vis{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:760px){.vis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.flow{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:760px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mine{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){.mine{grid-template-columns:1fr}}
+.post-wrap{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.post{max-width:none}
+.side{position:sticky;top:24px;display:grid;gap:24px}
+@media (max-width:860px){.post-wrap{grid-template-columns:1fr}.side{position:static}}
+section>.prose.note{max-width:none}
+.split{min-width:720px}
+.split td:first-child{font:500 12px var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.split td:nth-child(2){color:var(--muted);width:36%}
+.split td:nth-child(3){width:46%}
+.split th:nth-child(3){color:var(--amber)}
+body{margin:0}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero-top"><span class="wordmark">moorgen</span><span>Тестовое задание · контент-план на 15 дней</span><span>Александр Сахно · 16.11.2026</span></div>
+  <div class="hero-grid">
+    <div style="display:grid;gap:24px">
+      <h1>IDEAL DESIGN SPACE и три капсулы</h1>
+      <p class="lede">8 публикаций для архитекторов и дизайнеров частных резиденций в Telegram, Instagram и Pinterest. Пост дня 1 готов целиком, на нём показан процесс работы с ИИ.</p>
+      <div class="legend">
+        <span><span class="st ok">подтверждено</span> есть открытый источник</span>
+        <span><span class="st chk">сверить</span> источник косвенный</span>
+        <span><span class="st ask">запросить</span> нужен ответ команды</span>
+      </div>
+    </div>
+    <figure class="frame">
+      <div class="panel"><i></i><i></i><i></i><i></i></div>
+      <div class="caps top"><span class="wm">moorgen</span><span>Ideal Design Space</span></div>
+      <figcaption>Нужный кадр: панель на стене капсулы, тёплый свет сверху. Утверждённого фото нет.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- 1 -->
+<section>
+  <div class="sec-head"><div class="sh-l"><div class="eyebrow">01 · Исходные данные</div><h2>Что известно до старта</h2></div><p class="note">В тексты идут только подтверждённые факты. Остальное помечено в тексте и ждёт ответа команды.</p></div>
+  <div class="scroll"><table class="facts">
+    <thead><tr><th>Утверждение</th><th>Статус</th><th>Источник</th></tr></thead>
+    <tbody>
+      <tr><td>IDEAL DESIGN SPACE открылся 9 сентября 2026 года в интерьерном центре Casa Ricca EXPO на Рублёвском шоссе. Первая часть экспозиции включает 12 авторских интерьерных концепций</td><td><span class="st ok">подтверждено</span></td><td><a href="https://archi.ru/russia/102716/prostranstvo-dizaina" target="_blank" rel="noopener">archi.ru, 18.09.2026</a>; <a href="https://www.casaricca.ru/news/ideal-design-space-otkryt-vystavochnyy-proekt-v-casa-ricca-expo-u-kotorogo-net-analogov-v-rossii/" target="_blank" rel="noopener">casaricca.ru</a></td></tr>
+      <tr><td>Первый сезон продлится до марта 2027 года</td><td><span class="st ok">подтверждено</span></td><td><a href="https://moodboardmag.ru/ideal-design-space" target="_blank" rel="noopener">moodboardmag.ru</a>; <a href="https://rg.ru/2026/09/21/novoe-prostranstvo-ideal-design-space-obeshchaet-stat-tvorcheskoj-alternativoj-tradicionnym-dizajnerskim-vystavkam.html" target="_blank" rel="noopener">rg.ru</a></td></tr>
+      <tr><td>Инициатор проекта — премия ADDAWARDS.RU. Елена Крылова среди амбассадоров</td><td><span class="st ok">подтверждено</span></td><td><a href="https://moodboardmag.ru/ideal-design-space" target="_blank" rel="noopener">moodboardmag.ru</a></td></tr>
+      <tr><td>Tempo: пространство курортного кластера «Темпо» в IDS спроектировало дизайн-бюро Елены Крыловой. Бюро специализируется на отелях 5*</td><td><span class="st ok">подтверждено</span></td><td><a href="https://www.mirkvartir.ru/journal/news/2026/10/13/proshla-prezentaciya-krymskogo/" target="_blank" rel="noopener">mirkvartir.ru, 13.10.2026</a>, проверено вручную</td></tr>
+      <tr><td>Капсула Wasabi, Мария Серебрянная</td><td><span class="st ask">запросить</span></td><td>В открытых источниках не найдено</td></tr>
+      <tr><td>Капсула Галояна (полное имя автора)</td><td><span class="st ask">запросить</span></td><td>В открытых источниках не найдено</td></tr>
+      <tr><td>MOORGEN — соорганизатор трёх капсул; какие изделия бренда стоят в экспозиции</td><td><span class="st ask">запросить</span></td><td>Только бриф. В публикациях об IDS и соцсетях MOORGEN не упоминается</td></tr>
+      <tr><td>Панели MOORGEN отмечены наградой Red Dot</td><td><span class="st chk">сверить</span></td><td><a href="https://www.red-dot.org/project/moorgen-smart-switch-panel-52380" target="_blank" rel="noopener">red-dot.org</a>. Подтвердить, что это та же линейка, что продаётся в России</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card audit">
+    <div class="label">Каналы MOORGEN, 16.11</div>
+    <p>Telegram: 252 подписчика. Instagram: 25. Глобальный аккаунт: около 1 900. Посты каталожные: продукт и свет, без пояснений для проектировщиков.</p>
+    <p>Поэтому охват берём через партнёра и Pinterest, а в своих постах разбираем решения для архитектора.</p>
+  </div>
+  <div class="label">Визуальный стиль: по ленте moorgen_official</div>
+  <div class="vis">
+    <div class="v1"><b>Свет</b>Тёплый, низкий, один источник</div>
+    <div class="v2"><b>Палитра</b>Чёрный, бронза, янтарь, камень</div>
+    <div class="v3"><b>Кадр</b>Интерьер в полутени, продукт в фокусе</div>
+    <div class="v4"><b>Текст на фото</b>Логотип слева, подпись капсом справа: «SMART CONTROL»</div>
+  </div>
+  <p class="prose note">Визуалы в плане описаны в этом стиле.</p>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="sec-head"><div class="sh-l"><div class="eyebrow">02 · План</div><h2>Восемь публикаций на 15 дней</h2></div><p class="note">Открытие, по капсуле раз в 3–4 дня, партнёр, приглашение в шоурум. Каждая публикация отвечает на вопрос архитектора: где ставить панель, какие сценарии на неё вынести, как она сочетается с отделкой. Вопросы к команде — в последнем столбце.</p></div>
+  <div class="scroll"><table class="plan">
+    <thead><tr><th>День</th><th>Площадка и формат</th><th>Вопрос аудитории</th><th>Исходник</th><th>Визуал</th><th>Роль MOORGEN</th><th>Следующий шаг</th><th>Перед публикацией</th></tr></thead>
+    <tbody>
+      <tr><td class="day">1</td><td><b>Telegram</b>, пост. Адаптации: Instagram-карусель, Pinterest. <i>Готов целиком, раздел 03</i></td><td>Что посмотреть в IDS, если проектируешь резиденцию?</td><td>archi.ru, casaricca.ru, бриф MOORGEN</td><td>Панель в полутени, тёплый свет сверху. Подпись капсом: moorgen · Ideal Design Space</td><td>Соорганизатор трёх капсул, системы управления в экспозиции</td><td>Запись на показ в шоуруме (UTM: post1_opening)</td><td class="req">Официальная формулировка «соорганизатор», согласованная с IDS. Утверждённые фото. Можно ли отмечать IDS и авторов капсул</td></tr>
+      <tr><td class="day">3</td><td><b>Instagram</b>, карусель 8 слайдов «Разбор капсулы»</td><td>Как встроить управление в пространство уровня отеля 5*?</td><td>Публикация mirkvartir о «Темпо», ответы бюро Крыловой</td><td>Интерьер целиком → панель на отделке → схема сценариев → цитата дизайнера</td><td>Решение по свету, шторам и климату в Tempo</td><td>Сохранить пост; в конце ссылка на запись</td><td class="req">Модели панелей и количество. Функции каждой. Где стоят и почему там. Материал и цвет рамок. Цитата Елены Крыловой. Фото без логотипов кластера, если они не согласованы</td></tr>
+      <tr><td class="day">5</td><td><b>Telegram</b>, экспертный пост</td><td>Что решить до того, как выбирать панели для объекта?</td><td>Исходные сведения бренда: сценарии, место установки, материалы, геометрия</td><td>Планировка спальни с точками установки панелей</td><td>Экспертиза в проектировании управления</td><td>Скачать чек-лист из 5 вопросов к заказчику</td><td class="req">Кто из инженеров проверит текст. Есть ли рекомендуемые брендом высоты и места установки</td></tr>
+      <tr><td class="day">7</td><td><b>Instagram</b> Reels 20–30 с + Pinterest Idea Pin</td><td>Как меняется комната одним нажатием?</td><td>Видео с экспозиции Wasabi</td><td>Один план без склеек, как в Reels бренда: рука нажимает кнопку, свет уходит в янтарь, шторы закрываются</td><td>Сценарий вместо отдельных выключателей</td><td>Профиль → запись на показ</td><td class="req">Описание капсулы Wasabi и её идея. Настроенные сценарии. Модели и функции панелей. Можно ли снять 30 с в зале. Цитата Марии Серебрянной</td></tr>
+      <tr><td class="day">9</td><td><b>Pinterest</b>, доска «Панели в интерьере: материалы и геометрия», 6–9 пинов</td><td>Как панель смотрится рядом с камнем, деревом, металлом?</td><td>Фото трёх капсул</td><td>Вертикаль 2:3, низкий тёплый свет: панель на отделке, вокруг кусок интерьера. Подпись: материал рамки и стены</td><td>Панель как часть отделки</td><td>Страница коллекции (UTM: pinterest)</td><td class="req">Материалы рамок и отделок в каждой капсуле. Права на фото для Pinterest. Страница коллекции на сайте</td></tr>
+      <tr><td class="day">11</td><td><b>Telegram</b> + <b>Instagram</b>, карусель</td><td>Где разместить управление, если интерьер построен на сложной геометрии?</td><td>Ответы автора капсулы Галояна</td><td>Панель на изогнутой стене или в нише, если они есть в капсуле</td><td>Подбор места установки под геометрию</td><td>Запись на показ</td><td class="req">Полное имя автора и название капсулы. Идея в одном абзаце. Какие изделия MOORGEN стоят и где. Чем решение отличается от двух других. Фото</td></tr>
+      <tr><td class="day">13</td><td><b>Партнёр</b>: Telegram-канал ADDAWARDS.RU, пост «Маршрут по трём капсулам»</td><td>Как за час посмотреть три капсулы и понять, что брать в свои проекты?</td><td>Материалы постов 1–6</td><td>Схема зала IDS с отмеченными капсулами</td><td>Проводник по капсулам, приглашение на показ</td><td>Запись по ссылке партнёра (раздел 04)</td><td class="req">Условия размещения у ADDAWARDS: бюджет или бартер. Кто согласует текст с их стороны</td></tr>
+      <tr><td class="day">15</td><td><b>Instagram</b> stories 4–5 кадров + <b>Telegram</b> пост</td><td>Можно ли увидеть всё с инженером и обсудить свой проект?</td><td>Расписание шоурума</td><td>Кадр из каждой капсулы → даты показа → стикер-ссылка</td><td>Приглашение на показ для бюро</td><td>Запись на конкретную дату</td><td class="req">Даты и время показов. Адрес шоурума. Кто ведёт показ. Лимит мест</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="sec-head"><div class="sh-l"><div class="eyebrow">03 · Публикация целиком</div><h2>День 1, Telegram</h2></div></div>
+  <div class="post-wrap">
+    <article class="post">
+      <div class="shot"><div class="panel"><i></i><i></i><i></i><i></i></div><div class="caps top"><span class="wm">moorgen</span><span>Tempo · Smart control</span></div>Кадр: капсула Tempo, панель у изголовья, вечерний свет</div>
+      <h3>Три капсулы в IDEAL DESIGN SPACE: что посмотреть архитектору</h3>
+      <p>С 9 сентября в Casa Ricca EXPO на Рублёвском шоссе работает IDEAL DESIGN SPACE. Это постоянная экспозиция авторских интерьеров, предметного дизайна и искусства, первый сезон идёт до марта 2027 года.<sup>1</sup></p>
+      <p>MOORGEN стал соорганизатором трёх капсул: Tempo Елены Крыловой, Wasabi Марии Серебрянной и капсулы <span class="ph">[имя] Галояна</span>.<sup>2</sup> Свет, шторы и климат в них управляются с дизайнерских панелей MOORGEN <span class="ph">[подтвердить по каждой капсуле]</span>.</p>
+      <p>Что рассмотреть в каждой капсуле:</p>
+      <ol>
+        <li>Где стоит панель. От этого зависит, какие сценарии на неё вынесли. У входа удобен общий сценарий для комнаты, у кровати отдельно свет и шторы.</li>
+        <li>Как панель сочетается с отделкой стены: материал рамки, цвет, высота.</li>
+        <li>Сколько функций собрано на одной панели и как подписаны кнопки.</li>
+      </ol>
+      <p>Следующие две недели разбираем капсулы по одной: какую задачу ставил дизайнер, какие сценарии получились, где спрятали управление.</p>
+      <p>Панели можно посмотреть вживую в шоуруме MOORGEN и там же обсудить ваш объект. Запись на показ: <span class="ph">[ссылка с UTM]</span></p>
+      <div class="mono">…/showroom?utm_source=telegram&amp;utm_medium=social&amp;utm_campaign=ids_capsules_2026&amp;utm_content=post1_opening</div>
+    </article>
+    <aside class="side">
+      <div class="card src">
+        <div class="label">Источники ключевых утверждений</div>
+        <p><sup>1</sup> Дата, место, срок сезона: <a href="https://archi.ru/russia/102716/prostranstvo-dizaina" target="_blank" rel="noopener">archi.ru</a>, <a href="https://moodboardmag.ru/ideal-design-space" target="_blank" rel="noopener">moodboardmag.ru</a> <span class="st ok">подтверждено</span></p>
+        <p><sup>2</sup> MOORGEN как соорганизатор: только бриф, публичного подтверждения нет. Формулировку согласовать с командой и IDS <span class="st ask">запросить</span></p>
+              </div>
+    </aside>
+  </div>
+  <div class="grid2">
+      <div class="card">
+      <div class="label">Адаптация · Instagram, карусель 7 слайдов</div>
+      <ol>
+        <li>Обложка: панель в капсуле, заголовок «Три капсулы в IDEAL DESIGN SPACE».</li>
+        <li>IDS: где, с какого числа, до какого месяца.</li>
+        <li>Tempo, Елена Крылова: панель на отделке и одна строка о задаче.</li>
+        <li>Wasabi, Мария Серебрянная: то же.</li>
+        <li>Капсула Галояна: то же.</li>
+        <li>Что рассмотреть в каждой капсуле.</li>
+        <li>Запись на показ: ссылка в профиле.</li>
+      </ol>
+      <p><b>Подпись:</b> IDEAL DESIGN SPACE работает в Casa Ricca EXPO с 9 сентября. MOORGEN стал соорганизатором трёх капсул. Листайте: где в каждой стоит управление светом и шторами и почему именно там. Запись на показ в шоуруме по ссылке в профиле.</p>
+    </div>
+    <div class="card">
+      <div class="label">Адаптация · Pinterest, 3 пина</div>
+      <p>По пину на капсулу, вертикаль 1000×1500. Панель крупно на стене, вокруг кусок интерьера для масштаба.</p>
+      <p><b>Заголовок:</b> Панель управления светом у изголовья кровати · Tempo, IDEAL DESIGN SPACE</p>
+      <p><b>Описание:</b> Капсула Tempo, дизайн-бюро Елены Крыловой. Панель MOORGEN <span class="st ask">модель</span> в отделке <span class="st ask">материал</span>: свет, шторы и климат с одной панели. Идея для спальни в частной резиденции.</p>
+      <p class="note">Без дат: пины находят в поиске месяцами. Ссылка на страницу коллекции, utm_source=pinterest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="sec-head"><div class="sh-l"><div class="eyebrow">04 · Партнёрское размещение</div><h2>Пост в Telegram-канале ADDAWARDS.RU</h2></div></div>
+  <div class="grid2">
+    <div class="card">
+      <div class="label">Почему этот партнёр</div>
+      <p>ADDAWARDS.RU — инициатор IDEAL DESIGN SPACE, аудитория канала — дизайнеры и архитекторы. Около 1 800 подписчиков, 200–350 просмотров, посты раз в 2–3 дня.</p>
+      <p>Формат: «Маршрут по трём капсулам» с приглашением на показ в шоуруме.</p>
+      <p class="note">Цифры на 16.11. Условия уточнить у ADDAWARDS. Запасной вариант — Collab в Instagram с бюро Елены Крыловой.</p>
+    </div>
+    <div class="card">
+      <div class="label">Как отличить запись в шоурум от перехода</div>
+      <ol>
+        <li><b>Своя ссылка у партнёра.</b> Она ведёт на форму записи, метка попадает в скрытое поле формы и уходит менеджеру вместе с заявкой.</li>
+        <li><b>Записью считается форма</b> с названием бюро, объектом и удобной датой. Клик без формы — переход.</li>
+        <li><b>Кодовое слово «КАПСУЛЫ»</b> есть только в посте партнёра. Если человек пишет или звонит, а не переходит по ссылке, менеджер отмечает источник по этому слову.</li>
+        <li><b>Три числа в отчёте:</b> переходы по метке → заявки с source=addawards → визиты, которые подтвердил менеджер.</li>
+      </ol>
+      <div class="mono">…/showroom?utm_source=addawards&amp;utm_medium=partner&amp;utm_campaign=ids_capsules_2026&amp;utm_content=route_post</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="sec-head"><div class="sh-l"><div class="eyebrow">05 · Демо ИИ-процесса</div><h2>Как собрана публикация дня 1</h2></div><p class="note">Агент в Claude Code со скиллами и веб-поиском. Ниже процесс, которым сделано это задание. Жёлтое — проверка фактов, янтарное — мои шаги.</p></div>
+
+  <div class="flow">
+    <div class="step"><span class="n">0</span><b>Вход</b><span>Бриф, сведения о бренде, аудитория, формат площадки, правила тона и стоп-лист штампов</span></div>
+    <div class="step"><span class="n">1</span><b>Поиск</b><span>Агент ищет источники по IDS, капсулам и бренду и читает страницы</span></div>
+    <div class="step check"><span class="n">2</span><b>Таблица фактов</b><span>Агент сводит утверждения в таблицу с источником и статусом. Без источника — «запросить»</span></div>
+    <div class="step human"><span class="n">3</span><b>Ручная проверка</b><span>Открываю источники, которые агент не прочитал. Смотрю каналы бренда и партнёра</span></div>
+    <div class="step"><span class="n">4</span><b>Черновик</b><span>Агент пишет по подтверждённым фактам, пробелы закрывает пометками</span></div>
+    <div class="step check"><span class="n">5</span><b>Самопроверка</b><span>Агент сверяет числа и имена с таблицей и проверяет текст на штампы</span></div>
+    <div class="step human"><span class="n">6</span><b>Редактура</b><span>Выбираю заголовок, правлю формулировки</span></div>
+    <div class="step human"><span class="n">7</span><b>Согласование</b><span>Отправляю текст, таблицу фактов и вопросы команде</span></div>
+  </div>
+
+  <div class="grid2">
+    <div style="display:grid;gap:10px">
+      <div class="label">Что получает агент</div>
+      <div class="log">
+        <div><span class="who">задача:</span> пост для Telegram, день 1, открытие IDS и три капсулы</div>
+        <div><span class="who">аудитория:</span> архитекторы и дизайнеры частных резиденций</div>
+        <div><span class="who">о бренде:</span> панели и решения для управления светом, климатом, шторами, солнцезащитой; состав функций зависит от проекта</div>
+        <div><span class="who">правила:</span> только факты с источником; без оценок «лучший», «уникальный»; не найдено — плейсхолдер [запросить]</div>
+        <div><span class="who">скиллы:</span> copywriting (тон и проверка на штампы), social (формат площадки)</div>
+      </div>
+    </div>
+    <div style="display:grid;gap:10px">
+      <div class="label">Журнал проверки фактов</div>
+      <div class="log">
+        <div>archi.ru: «9 сентября 2026 года открылась первая часть экспозиции с 12 авторскими интерьерными концепциями» → <span class="st ok">подтверждено</span></div>
+        <div>mirkvartir.ru, «Темпо»: агент страницу не открыл → <span class="st chk">сверить</span> → проверено вручную → <span class="st ok">подтверждено</span></div>
+        <div>«Мария Серебрянная Wasabi»: релевантных результатов нет → <span class="st ask">запросить</span></div>
+        <div>MOORGEN в публикациях об IDS и в своих соцсетях: не упоминается → <span class="st ask">запросить</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:10px">
+    <div class="label">Кто что сделал в этом задании</div>
+    <div class="scroll"><table class="split">
+      <thead><tr><th>Этап</th><th>Агент</th><th>Я</th></tr></thead>
+      <tbody>
+        <tr><td>Источники</td><td>Искал по IDS, каждой капсуле и бренду. Прочитал четыре страницы, статью о «Темпо» открыть не смог</td><td>Открыл статью о «Темпо», подтвердил бюро Крыловой. Деталь про отели 5* взял в пост дня 3</td></tr>
+        <tr><td>Каналы бренда</td><td>—</td><td>Посмотрел Telegram, Instagram и глобальный аккаунт. Про IDS ничего нет. Добавил в план партнёра и Pinterest</td></tr>
+        <tr><td>Визуал</td><td>Описал нужные кадры</td><td>Разобрал ленту moorgen_official, переписал кадры в плане под её стиль</td></tr>
+        <tr><td>Партнёр</td><td>Предложил ADDAWARDS.RU как инициатора IDS</td><td>Проверил охват канала, выбрал его</td></tr>
+        <tr><td>Текст</td><td>Черновик из подтверждённых фактов, проверка на штампы, три варианта заголовка</td><td>Выбрал заголовок, правил формулировки</td></tr>
+        <tr><td>Учёт записей</td><td>UTM-метки и форма со скрытым полем</td><td>Добавил кодовое слово для звонков и сообщений</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Правки до согласования</div>
+    <div class="diff">
+      <p><span class="del">IDEAL DESIGN SPACE — уникальный проект, у которого нет аналогов в России.</span><br><span class="add">Это постоянная экспозиция авторских интерьеров, предметного дизайна и искусства.</span><span class="who-tag">агент</span><br><span class="note">Оценка из пресс-релиза, её нельзя проверить.</span></p>
+      <p><span class="del">В каждой капсуле установлены панели MOORGEN.</span><br><span class="add">…управляются с дизайнерских панелей MOORGEN [подтвердить по каждой капсуле].</span><span class="who-tag">агент</span><br><span class="note">Публично не подтверждено, пометка стоит до ответа команды.</span></p>
+      <p><span class="del">Приглашаем вас посетить наш шоурум!</span><br><span class="add">Панели можно посмотреть вживую в шоуруме MOORGEN и там же обсудить ваш объект.</span><span class="who-tag">агент</span><br><span class="note">Вместо призыва — что можно сделать в шоуруме.</span></p>
+    </div>
+  </div>
+  <p class="prose note">На согласование: текст, таблица фактов, вопросы команде. Публикация после замены всех красных вставок.</p>
+</section>
+
+<footer>Александр Сахно · тестовое задание для MOORGEN · 16.11.2026</footer>
+</div>
+</body>
+</html>
