@@ -153,6 +153,11 @@ section>.prose.note{max-width:none}
 .split td:nth-child(2){color:var(--muted);width:36%}
 .split td:nth-child(3){width:46%}
 .split th:nth-child(3){color:var(--amber)}
+.shots figure{margin:0;display:grid;gap:12px;align-content:start;background:var(--paper);padding:14px}
+.shots img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.shots figcaption{font-size:13.5px;color:var(--muted)}
+.shots figcaption b{color:var(--ink);font-weight:600}
+.urlbar{font:400 12px var(--f-mono);color:var(--muted);background:var(--paper-2);padding:8px 12px;border:1px solid var(--line);border-bottom:0;margin-bottom:-12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 body{margin:0}
 </style>
 </head>
@@ -316,6 +321,18 @@ body{margin:0}
     <div class="step check"><span class="n">5</span><b>Самопроверка</b><span>Агент сверяет числа и имена с таблицей и проверяет текст на штампы</span></div>
     <div class="step human"><span class="n">6</span><b>Редактура</b><span>Выбираю заголовок, правлю формулировки</span></div>
     <div class="step human"><span class="n">7</span><b>Согласование</b><span>Отправляю текст, таблицу фактов и вопросы команде</span></div>
+  </div>
+
+  <div class="grid2 shots">
+    <figure>
+      <img src="img/shot-search.png" alt="Лог поиска в Claude Code: запросы по IDS, капсулам и бренду с итогами" loading="lazy">
+      <figcaption><b>Шаги 1–2.</b> Поиск в Claude Code: запросы дословно, ответы сокращены. Внизу итог со статусами.</figcaption>
+    </figure>
+    <figure>
+      <div class="urlbar">mirkvartir.ru/journal/news/2026/10/13/proshla-prezentaciya-krymskogo</div>
+      <img src="img/shot-check.png" alt="Статья mirkvartir.ru, выделена фраза о том, что пространство «Темпо» в IDS разработало бюро Елены Крыловой" loading="lazy">
+      <figcaption><b>Шаг 3.</b> Ручная проверка: агент не смог открыть статью, открыл её сам. Ключевая фраза выделена.</figcaption>
+    </figure>
   </div>
 
   <div class="grid2">
